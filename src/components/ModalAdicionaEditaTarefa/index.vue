@@ -50,9 +50,7 @@ watch(() => props.tarefa, (editaTarefa) => {
     tarefa.titulo = editaTarefa.titulo;
     tarefa.descricao = editaTarefa.descricao;
   } else {
-    tarefa.id_tarefa = null;
-    tarefa.titulo = '';
-    tarefa.descricao = '';
+    resetTarefa();
   }
 }, { immediate: true })
 
@@ -62,7 +60,14 @@ const isOpen = computed({
 })
 
 function fecharModal() {
+  resetTarefa();
   isOpen.value = false
+}
+
+function resetTarefa() {
+  tarefa.id_tarefa = null;
+  tarefa.titulo = '';
+  tarefa.descricao = '';
 }
 
 function salvarTarefa() {
@@ -122,7 +127,8 @@ function salvarTarefa() {
   flex-direction: column;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -132,7 +138,8 @@ input, textarea {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border-color: #1976d2;
   box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
   outline: none;
